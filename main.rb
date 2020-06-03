@@ -51,7 +51,7 @@ FileUtils.copy "#{moc_ico}_500.png", "#{dir_n}/ico_#{name}.png"
 
 
 
-str = "set_friendly_name #{name}\nset_avatar_skin_description sayo default txt_desc#{name}\n"
+str = "set_friendly_name #{name}\nset_avatar_skin_description #{name} default txt_desc#{name}\n"
 open "#{dir_n}/cc_names_#{name}.cfg", "w" do |f|
     f << str
 end
