@@ -41,12 +41,15 @@ unless File.exist? moc_ico
 end
 
 dir_n = "#{dir}/#{name}"
+
+`convert #{moc_ico} -resize 500x500! #{moc_ico}_500.png`
 FileUtils.mkdir_p dir_n
 FileUtils.mkdir_p "#{dir_n}/#{name}.1024"
-
 FileUtils.copy moc_file, dir_n
 FileUtils.copy moc_texture, "#{dir_n}/#{name}.1024/texture_00.png"
-FileUtils.copy moc_ico, "#{dir_n}/ico_#{name}.png"
+FileUtils.copy "#{moc_ico}_500.png", "#{dir_n}/ico_#{name}.png"
+
+
 
 str = "set_friendly_name #{name}\nset_avatar_skin_description sayo default txt_desc#{name}\n"
 open "#{dir_n}/cc_names_#{name}.cfg", "w" do |f|
