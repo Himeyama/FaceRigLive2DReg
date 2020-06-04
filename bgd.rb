@@ -44,4 +44,10 @@ end
 
 name = "#{File.basename(path).match(/^\d*?_(.*?)$/)[1]}_#{File.basename moc, ".moc"}" 
 
+info_moc_ico = `identify -format "%[height],%[width]" #{moc_ico}`
+if info_moc_ico == "730,973"
+    `convert #{moc_ico} -crop 275x275+347+85 #{tmp}/out.png`
+    moc_ico = "#{tmp}/out.png"
+end
+
 `#{dir}/main.rb #{name} #{tmp}/#{moc} #{tmp}/#{textures} #{moc_ico}`
