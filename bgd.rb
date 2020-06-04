@@ -16,6 +16,14 @@ if ARGV.size != 2
     puts "サムネイル画像の場所を入力してください:"
     print "Path[1]: "
     moc_ico = gets.chop
+else
+    path = ARGV[0]
+    moc_ico = ARGV[1]
+end
+
+unless File.exist? moc_ico
+    warn "\033[31mエラー: サムネイル画像が存在しません\033[0m"
+    exit false
 end
 
 req = URI.parse "#{uri}#{path}_rip/buildData.asset"
@@ -34,6 +42,6 @@ open "#{tmp}/#{textures}", "w" do |f|
     f << res
 end
 
-name = File.basename moc, ".moc"
+name = "#{File.basename path}_#{File.basename moc, ".moc"}" 
 
 `#{dir}/main.rb #{name} #{tmp}/#{moc} #{tmp}/#{textures} #{moc_ico}`
