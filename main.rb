@@ -2,7 +2,7 @@
 
 require "fileutils"
 
-dir = "#{ENV["RBENV_DIR"]}/Objects"
+dir = "/mnt/c/Program\ Files\ \(x86\)/Steam/steamapps/common/FaceRig/Mod/VP/PC_Common/Objects/"
 FileUtils.mkdir_p dir
 name = ARGV[0]
 unless name

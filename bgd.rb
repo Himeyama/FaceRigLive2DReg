@@ -42,6 +42,6 @@ open "#{tmp}/#{textures}", "w" do |f|
     f << res
 end
 
-name = "#{File.basename path}_#{File.basename moc, ".moc"}" 
+name = "#{File.basename(path).match(/^\d*?_(.*?)$/)[1]}_#{File.basename moc, ".moc"}" 
 
 `#{dir}/main.rb #{name} #{tmp}/#{moc} #{tmp}/#{textures} #{moc_ico}`
