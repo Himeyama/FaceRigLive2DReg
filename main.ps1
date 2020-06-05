@@ -1,4 +1,4 @@
-add-type -assembly System.Windows.Forms
+﻿add-type -assembly System.Windows.Forms
 add-type -AssemblyName System.Drawing
 
 $Form = new-object System.Windows.Forms.Form
@@ -131,8 +131,8 @@ function core($name, $moc, $texu, $ico){
     $img_ico = new-object System.Drawing.Bitmap($ico)
     $img_ico_500 = resize $img_ico 500 500
     $img_ico.dispose()
-    $img_ico_500.save("tmp.png", [System.Drawing.Imaging.ImageFormat]::Png)
-    Move-Item -Path "tmp.png" -Destination "$fr_dir\$name\ico_$name.png" -Force
+    $img_ico_500.save("${HOME}\tmp000.png", [System.Drawing.Imaging.ImageFormat]::Png)
+    Move-Item -Path "${HOME}\tmp000.png" -Destination "$fr_dir\$name\ico_$name.png" -Force
     $img_ico_500.dispose()
     Copy-Item -Path "$moc" -Destination "$fr_dir\$name"
     Copy-Item -Path "$texu" -Destination "$fr_dir\$name\$name.1024\texture_00.png"
