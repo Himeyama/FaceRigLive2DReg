@@ -46,7 +46,7 @@ dir_n = "#{dir}/#{name}"
 FileUtils.mkdir_p dir_n
 FileUtils.mkdir_p "#{dir_n}/#{name}.1024"
 FileUtils.copy moc_file, dir_n
-FileUtils.copy moc_texture, "#{dir_n}/#{name}.1024/texture_00.png"
+FileUtils.copy Dir.glob("#{moc_texture}texture_*.png"), "#{dir_n}/#{name}.1024/"
 FileUtils.copy "#{moc_ico}_500.png", "#{dir_n}/ico_#{name}.png"
 
 str = "set_friendly_name #{name}\nset_avatar_skin_description #{name} default txt_desc#{name}\n"

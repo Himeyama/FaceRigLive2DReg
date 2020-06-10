@@ -2,3 +2,4 @@ Objects
 tmp/*
 !tmp/このディレクトリーはファイルの一時置き場
 *.Identifier
+chara

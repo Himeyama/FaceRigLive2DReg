@@ -36,10 +36,14 @@ open "#{tmp}/#{moc}", "w" do |f|
     f << res
 end
 
-req = URI.parse "#{uri}#{assets_data["Base"]["textures"][0]["bundleName"]}_rip/#{textures = assets_data["Base"]["textures"][0]["fileName"]}"
-res = Net::HTTP.get req
-open "#{tmp}/#{textures}", "w" do |f|
-    f << res
+FileUtils.rm Dir.glob("#{tmp}/texture*")
+textures = ""
+assets_data["Base"]["textures"].size.times do |i|
+    req = URI.parse "#{uri}#{assets_data["Base"]["textures"][0]["bundleName"]}_rip/#{textures = assets_data["Base"]["textures"][i]["fileName"]}"
+    res = Net::HTTP.get req
+    open "#{tmp}/#{textures}", "w" do |f|
+        f << res
+    end
 end
 
 name = "#{File.basename(path).match(/^\d*?_(.*?)$/)[1]}_#{File.basename moc, ".moc"}" 
@@ -48,6 +52,9 @@ info_moc_ico = `identify -format "%[height],%[width]" #{moc_ico}`
 if info_moc_ico == "730,973"
     `convert #{moc_ico} -crop 275x275+347+85 #{tmp}/out.png`
     moc_ico = "#{tmp}/out.png"
+elsif info_moc_ico == "584,480"
+    `convert #{moc_ico} -crop 275x275+100+85 #{tmp}/out.png`
+    moc_ico = "#{tmp}/out.png"
 end
 
-`#{dir}/main.rb #{name} #{tmp}/#{moc} #{tmp}/#{textures} #{moc_ico}`
+`#{dir}/main.rb #{name} #{tmp}/#{moc} #{tmp}/ #{moc_ico}`
